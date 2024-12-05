@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+
+<div class="row">
+  <div class="col-md-4 offset-md-4">
+      <h1>Editar Proveedor</h1>
+      <div class="card">
+          <div class="card-body">
+              <form action="{% url 'editarProveedor' %}" method="POST"> 
+                  {% csrf_token %}
+                  
+                  <div class="form-group">
+                      <input type="text" id="txtid" name="txtid" class="form-control" value="{{ misproveedores.id }}" readonly required>
+                  </div>
+                  
+                  <div class="form-group py-3">
+                      <input type="text" id="txtnombre" name="txtnombre" class="form-control" value="{{ misproveedores.nombre }}" maxlength="20" required>
+                  </div>
+
+                  <div class="form-group py-3">
+                      <input type="number" id="numtelefono" name="numtelefono" class="form-control" value="{{ misproveedores.telefono }}" required>
+                  </div>
+
+                  <div class="form-group py-3">
+                      <input type="email" id="txtcorreoelectronico" name="txtcorreoelectronico" class="form-control" value="{{ misproveedores.correoelectronico }}" maxlength="20" required>
+                  </div>
+
+                  <div class="form-group py-3">
+                      <input type="text" id="txtdireccion" name="txtdireccion" class="form-control" value="{{ misproveedores.direccion }}" maxlength="50" required>
+                  </div>
+
+                  <div class="form-group py-3">
+                      <textarea id="txtlistasproductos" name="txtlistasproductos" class="form-control" maxlength="500" required>{{ misproveedores.listasproductos }}</textarea>
+                  </div>
+
+                  <div class="form-group py-3">
+                      <input type="number" id="numedad" name="numedad" class="form-control" value="{{ misproveedores.edad }}" required>
+                  </div>
+
+                  <div class="form-group py-2">
+                      <button type="submit" class="btn btn-primary">Guardar</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+{% endblock %}

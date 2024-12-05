@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+{% block cuerpo %}
+
+<div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <h1>Agregar Venta</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'registrarVenta' %}" method="POST">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <input type="text" id="txtid" name="txtid" class="form-control" placeholder="ID de la Venta" required>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <input type="date" id="datefechaventa" name="datefechaventa" class="form-control" required>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <input type="text" id="txtidcliente" name="txtidcliente" class="form-control" placeholder="ID Cliente" required>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <input type="text" id="txtidempleado" name="txtidempleado" class="form-control" placeholder="ID Empleado" required>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <textarea type="text" id="txtlistaproducto" name="txtlistaproducto" class="form-control" placeholder="Lista de Productos" required></textarea>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <input type="number" id="numtotalventa" name="numtotalventa" class="form-control" placeholder="Total de la Venta" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-8">
+        <h1>Listado de Ventas</h1>
+        <img src="{% static "img/ventas.jpg" %}" style="width: 300px;" alt="">
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Fecha de Venta</th>
+                        <th scope="col">ID Cliente</th>
+                        <th scope="col">ID Empleado</th>
+                        <th scope="col">Lista de Productos</th>
+                        <th scope="col">Total Venta</th>
+                        <th scope="col">-</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for v in misventas %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ v.id }}</td>
+                        <td>{{ v.fechaventa }}</td>
+                        <td>{{ v.idcliente }}</td>
+                        <td>{{ v.idempleado }}</td>
+                        <td>{{ v.listaproducto }}</td>
+                        <td>{{ v.totalventa }}</td>
+
+                        <td><a href="seleccionarVenta/{{ v.id }}" class="btn btn-success">Editar</a></td>
+                        <td><a href="borrarVenta/{{ v.id }}" class="btn btn-danger">Borrar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

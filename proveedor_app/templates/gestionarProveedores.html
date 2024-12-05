@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+{% block cuerpo %}
+
+<div class="row">
+  <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+      <h1>Agregar Proveedor</h1>
+      <div class="card">
+          <div class="card-body">
+              <form action="{% url 'registrarProveedor' %}" method="POST"> 
+                  {% csrf_token %}
+                  
+                  <div class="form-group">
+                      <input type="text" id="txtid" name="txtid" class="form-control" placeholder="ID del Proveedor" required>
+                  </div>
+                  
+                  <div class="form-group py-3">
+                      <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Nombre" maxlength="20" required>
+                  </div>
+
+                  <div class="form-group py-3">
+                      <input type="number" id="numtelefono" name="numtelefono" class="form-control" placeholder="Teléfono" required>
+                  </div>
+
+                  <div class="form-group py-3">
+                      <input type="email" id="txtcorreoelectronico" name="txtcorreoelectronico" class="form-control" placeholder="Correo Electrónico" maxlength="20" required>
+                  </div>
+
+                  <div class="form-group py-3">
+                      <input type="text" id="txtdireccion" name="txtdireccion" class="form-control" placeholder="Dirección" maxlength="50" required>
+                  </div>
+
+                  <div class="form-group py-3">
+                      <textarea id="txtlistasproductos" name="txtlistasproductos" class="form-control" placeholder="Lista de Productos" maxlength="500" required></textarea>
+                  </div>
+
+                  <div class="form-group py-3">
+                      <input type="number" id="numedad" name="numedad" class="form-control" placeholder="Edad" required>
+                  </div>
+
+                  <div class="form-group py-2">
+                      <button type="submit" class="btn btn-primary">Guardar</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+
+  <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+      <h1>Listado de Proveedores</h1>
+      <img src="{% static 'img/proveedores.jpg' %}" style="width: 300px;" alt="Imagen de proveedores">
+
+      <div class="table-responsive">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>ID</th>
+                      <th>Nombre</th>
+                      <th>Teléfono</th>
+                      <th>Correo</th>
+                      <th>Dirección</th>
+                      <th>Productos</th>
+                      <th>Edad</th>
+                      <th>-</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for proveedor in misproveedores %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ proveedor.id }}</td>
+                          <td>{{ proveedor.nombre }}</td>
+                          <td>{{ proveedor.telefono }}</td>
+                          <td>{{ proveedor.correoelectronico }}</td>
+                          <td>{{ proveedor.direccion }}</td>
+                          <td>{{ proveedor.listasproductos }}</td>
+                          <td>{{ proveedor.edad }}</td>
+                          <td><a href="seleccionarProveedor/{{ proveedor.id }}" class="btn btn-success">Editar</a></td>
+                          <td><a href="borrarProveedor/{{ proveedor.id }}" class="btn btn-danger">Borrar</a></td>
+                      </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+
+{% endblock %}
