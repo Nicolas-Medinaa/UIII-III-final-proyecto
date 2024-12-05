@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+
+<div class="row">
+  <div class="col-md-4 offset-md-4">
+      <h1>Editar Empleado</h1>
+      <div class="card">
+          <div class="card-body">
+              <form action="{% url 'editarEmpleado' %}" method="POST">
+                  {% csrf_token %}
+                  
+                  <div class="form-group">
+                      <input type="text" id="txtid" name="txtid" class="form-control" value="{{ misempleados.id }}" readonly required>
+                  </div>
+                  
+                  <div class="form-group py-3">
+                      <input type="text" id="txtnombre" name="txtnombre" class="form-control" value="{{ misempleados.nombre }}" maxlength="50" required>
+                  </div>
+
+                  <div class="form-group py-3">
+                      <input type="text" id="txtcargo" name="txtcargo" class="form-control" value="{{ misempleados.cargo }}" maxlength="50" required>
+                  </div>
+
+                  <div class="form-group py-3">
+                      <input type="text" id="txtcorreoelectronico" name="txtcorreoelectronico" class="form-control" value="{{ misempleados.correoelectronico }}" maxlength="50" required>
+                  </div>
+
+                  <div class="form-group py-3">
+                      <input type="number" id="numtelefono" name="numtelefono" class="form-control" value="{{ misempleados.telefono }}" required>
+                  </div>
+
+                  <div class="form-group py-3">
+                    <input type="date" id="datefechacontratacion" name="datefechacontratacion" class="form-control" value="{{ misempleados.fechacontratacion|date:'Y-m-d' }}" required>
+                  </div>
+
+                  <div class="form-group py-2">
+                      <button type="submit" class="btn btn-primary">Actualizar</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+{% endblock %}

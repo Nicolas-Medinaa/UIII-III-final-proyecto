@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+
+<div class="row">
+  <div class="col-sm-12 col-md-4 offset-md-4">
+    <h1>Editar Inventario</h1>
+    <div class="card">
+      <div class="card-body">
+        <form action="{% url 'editarInventario' %}" method="POST">
+          {% csrf_token %}
+          
+          <div class="form-group">
+            <input type="text" id="txtid" name="txtid" class="form-control" value="{{ misinventarios.id }}" readonly required>
+          </div>
+          
+          <div class="form-group py-3">
+            <input type="text" id="txtmarca" name="txtmarca" class="form-control" value="{{ misinventarios.marca }}" maxlength="50" required>
+          </div>
+          
+          <div class="form-group py-3">
+            <input type="text" id="txtmodelo" name="txtmodelo" class="form-control" value="{{ misinventarios.modelo }}" maxlength="20" required>
+          </div>
+          
+          <div class="form-group py-3">
+            <input type="number" id="numcantidad" name="numcantidad" class="form-control" value="{{ misinventarios.cantidad }}" required>
+          </div>
+          
+          <div class="form-group py-3">
+            <input type="number" id="numaño" name="numaño" class="form-control" value="{{ misinventarios.año }}" required>
+          </div>
+          
+          <div class="form-group py-3">
+            <input type="text" id="txtidproveedor" name="txtidproveedor" class="form-control" value="{{ misinventarios.idproveedor }}" required>
+          </div>
+          
+          <div class="form-group py-3">
+            <input type="text" id="txtsucursal" name="txtsucursal" class="form-control" value="{{ misinventarios.sucursal }}" required>
+          </div>
+          
+          <div class="form-group py-2">
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

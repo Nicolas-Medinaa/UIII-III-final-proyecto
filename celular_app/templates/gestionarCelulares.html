@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+{% block cuerpo %}
+
+<div class="row">
+  <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+      <h1>Agregar Celular</h1>
+      <div class="card">
+          <div class="card-body">
+              <form action="/registrarCelular/" method="POST"> 
+                  {% csrf_token %}
+                  
+                  <div class="form-group">
+                      <input type="text" id="txtid" name="txtid" class="form-control" placeholder="ID del Celular" required>
+                  </div>
+                  
+                  <div class="form-group py-3">
+                      <input type="text" id="txtmarca" name="txtmarca" class="form-control" placeholder="Marca" maxlength="10" required>
+                  </div>
+                  
+                  <div class="form-group py-3">
+                      <input type="text" id="txtmodelo" name="txtmodelo" class="form-control" placeholder="Modelo" maxlength="10" required>
+                  </div>
+                  
+                  <div class="form-group py-3">
+                      <input type="text" id="txtgama" name="txtgama" class="form-control" placeholder="Gama" maxlength="10" required>
+                  </div>
+                  
+                  <div class="form-group py-3">
+                      <input type="number" id="numprecio" name="numprecio" class="form-control" placeholder="Precio" required>
+                  </div>
+                  
+                  <div class="form-group py-3">
+                      <input type="number" id="numidproveedor" name="numidproveedor" class="form-control" placeholder="ID del Proveedor" required>
+                  </div>
+                  
+                  <div class="form-group py-3">
+                      <input type="number" id="numidinventario" name="numidinventario" class="form-control" placeholder="ID del Inventario" required>
+                  </div>
+                  
+                  <div class="form-group py-2">
+                      <button type="submit" class="btn btn-primary">Guardar</button>
+                  </div>
+                  
+              </form>
+          </div>
+      </div>
+  </div>
+
+
+<div class="col-sm-12 col-md-4 col-lg-4 col-xl-8">
+    <h1>Listado de Celulares</h1>
+    <img src="{% static 'img/celulares.jpg' %}" alt="Ejemplo de imagen">
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Gama</th>
+                <th scope="col">Precio</th>
+                <th scope="col">ID Proveedor</th>
+                <th scope="col">ID Inventario</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for m in miscelulares %}
+                  <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ m.id }}</td>
+                    <td>{{ m.marca }}</td>
+                    <td>{{ m.modelo }}</td>
+                    <td>{{ m.gama }}</td>
+                    <td>{{ m.precios }}</td>
+                    <td>{{ m.idproveedor }}</td>
+                    <td>{{ m.idinventario }}</td>
+                    <td><a href="seleccionarCelular/{{ m.id }}" class="btn btn-success">Editar</a></td>
+                    <td><a href="borrarCelular/{{ m.id }}" class="btn btn-danger">Borrar</a></td>
+                  </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

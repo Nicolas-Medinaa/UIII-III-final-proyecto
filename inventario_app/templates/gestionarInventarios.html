@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+{% block cuerpo %}
+
+<div class="row">
+  <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+    <h1>Agregar Inventario</h1>
+    <div class="card">
+      <div class="card-body">
+        <form action="{% url 'registrarInventario' %}" method="POST">
+          {% csrf_token %}
+          
+          <div class="form-group">
+            <input type="text" id="txtid" name="txtid" class="form-control" placeholder="ID del Inventario" required>
+          </div>
+          
+          <div class="form-group py-3">
+            <input type="text" id="txtmarca" name="txtmarca" class="form-control" placeholder="Marca" maxlength="50" required>
+          </div>
+          
+          <div class="form-group py-3">
+            <input type="text" id="txtmodelo" name="txtmodelo" class="form-control" placeholder="Modelo" maxlength="20" required>
+          </div>
+          
+          <div class="form-group py-3">
+            <input type="number" id="numcantidad" name="numcantidad" class="form-control" placeholder="Cantidad" required>
+          </div>
+          
+          <div class="form-group py-3">
+            <input type="number" id="numaño" name="numaño" class="form-control" placeholder="Año" required>
+          </div>
+          
+          <div class="form-group py-3">
+            <input type="text" id="txtidproveedor" name="txtidproveedor" class="form-control" placeholder="ID Proveedor" required>
+          </div>
+          
+          <div class="form-group py-3">
+            <input type="text" id="txtsucursal" name="txtsucursal" class="form-control" placeholder="Sucursal" required>
+          </div>
+          
+          <div class="form-group py-2">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-12 col-md-4 col-lg-4 col-xl-8">
+    <h1>Listado de Inventarios</h1>
+    <img src="{% static "img/inventarios.jpg" %}" style="width: 250px;" alt="">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Marca</th>
+            <th scope="col">Modelo</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Año</th>
+            <th scope="col">ID Proveedor</th>
+            <th scope="col">Sucursal</th>
+            <th scope="col">-</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for inv in misinventarios %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ inv.marca }}</td>
+              <td>{{ inv.modelo }}</td>
+              <td>{{ inv.cantidad }}</td>
+              <td>{{ inv.año }}</td>
+              <td>{{ inv.idproveedor }}</td>
+              <td>{{ inv.sucursal }}</td>
+              <td><a href="seleccionarInventario/{{ inv.id }}" class="btn btn-success">Editar</a></td>
+              <td><a href="borrarInventario/{{ inv.id }}" class="btn btn-danger">Borrar</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

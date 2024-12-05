@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+{% block cuerpo %}
+
+<div class="row">
+  <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+      <h1>Agregar Cliente</h1>
+      <div class="card">
+          <div class="card-body">
+              <form action="{% url 'registrarCliente' %}" method="POST">
+                  {% csrf_token %}
+                  
+                  <div class="form-group">
+                      <input type="text" id="txtid" name="txtid" class="form-control" placeholder="ID del Cliente" required>
+                  </div>
+                  
+                  <div class="form-group py-3">
+                      <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Nombre" maxlength="15" required>
+                  </div>
+                  
+                  <div class="form-group py-3">
+                      <input type="text" id="txtapellido" name="txtapellido" class="form-control" placeholder="Apellido" maxlength="15" required>
+                  </div>
+                  
+                  <div class="form-group py-3">
+                      <input type="email" id="txtcorreo" name="txtcorreo" class="form-control" placeholder="Correo" maxlength="20" required>
+                  </div>
+                  
+                  <div class="form-group py-3">
+                      <input type="number" id="numtelefono" name="numtelefono" class="form-control" placeholder="Teléfono" required>
+                  </div>
+                  
+                  <div class="form-group py-3">
+                      <input type="text" id="txtdireccion" name="txtdireccion" class="form-control" placeholder="Dirección" maxlength="20" required>
+                  </div>
+                  
+                  <div class="form-group py-3">
+                      <textarea id="txthistorial" name="txthistorial" class="form-control" placeholder="Historial" required></textarea>
+                  </div>
+
+                  <div class="form-group py-3">
+                      <input type="number" id="numinventario" name="numinventario" class="form-control" placeholder="ID Inventario" required>
+                  </div>
+
+                  <div class="form-group py-2">
+                      <button type="submit" class="btn btn-primary">Guardar</button>
+                  </div>
+                  
+              </form>
+          </div>
+      </div>
+  </div>
+
+<div class="col-sm-12 col-md-4 col-lg-4 col-xl-8">
+    <h1>Listado de Clientes</h1>
+    <img src="{% static 'img/clientes.jpg' %}" alt="Ejemplo de imagen">
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Historial</th>
+                    <th scope="col">-</th>
+                    <th scope="col">-</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente in misclientes %}
+                  <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ cliente.id }}</td>
+                    <td>{{ cliente.nombre }}</td>
+                    <td>{{ cliente.apellido }}</td>
+                    <td>{{ cliente.correo }}</td>
+                    <td>{{ cliente.telefono }}</td>
+                    <td>{{ cliente.direccion }}</td>
+                    <td>{{ cliente.historial }}</td>
+                    <td><a href="seleccionarCliente/{{ cliente.id }}" class="btn btn-success">Editar</a></td>
+                    <td><a href="borrarCliente/{{ cliente.id }}" class="btn btn-danger">Borrar</a></td>
+                  </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

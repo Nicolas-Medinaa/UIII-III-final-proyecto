@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% block cuerpo %}
+
+<div class="row justify-content-center">
+  <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+      <h1>Editar Cliente</h1>
+      <div class="card">
+          <div class="card-body">
+              <form action="{% url 'editarCliente'%}" method="POST">
+                  {% csrf_token %}
+                  
+                  <div class="form-group">
+                      <input type="text" id="txtid" name="txtid" class="form-control" value="{{ misclientes.id }}" readonly required>
+                  </div>
+                  
+                  <div class="form-group py-3">
+                      <input type="text" id="txtnombre" name="txtnombre" class="form-control" value="{{ misclientes.nombre }}" maxlength="15" required>
+                  </div>
+                  
+                  <div class="form-group py-3">
+                      <input type="text" id="txtapellido" name="txtapellido" class="form-control" value="{{ misclientes.apellido }}" maxlength="15" required>
+                  </div>
+                  
+                  <div class="form-group py-3">
+                      <input type="email" id="txtcorreo" name="txtcorreo" class="form-control" value="{{ misclientes.correo }}" maxlength="20" required>
+                  </div>
+                  
+                  <div class="form-group py-3">
+                      <input type="number" id="numtelefono" name="numtelefono" class="form-control" value="{{ misclientes.telefono }}" required>
+                  </div>
+                  
+                  <div class="form-group py-3">
+                      <input type="text" id="txtdireccion" name="txtdireccion" class="form-control" value="{{ misclientes.direccion }}" maxlength="20" required>
+                  </div>
+                  
+                  <div class="form-group py-3">
+                      <textarea id="txthistorial" name="txthistorial" class="form-control" required>{{ misclientes.historial }}</textarea>
+                  </div>
+
+                  <div class="form-group py-3">
+                      <input type="number" id="numinventario" name="numinventario" class="form-control" value="{{ misclientes.idinventario }}" required>
+                  </div>
+
+                  <div class="form-group py-2">
+                      <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                  </div>
+                  
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+{% endblock %}
